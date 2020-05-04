@@ -42,6 +42,11 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
         txt_ya.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://translate.yandex.ru/")))
         }
+
+        swipe_refresh_chack.setOnRefreshListener {
+            presenter.refreshLoadQuotes()
+            swipe_refresh_chack.isRefreshing = false
+        }
     }
 
     override fun load() {
@@ -60,7 +65,7 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
     override fun completeLoadingEn(icon: String, quoteEn: String) {
         cpv_chack_loader.visibility = View.GONE
         txt_author_eng_chack.isEnabled = true
-        txt_author_eng_chack.text = quoteEn
+        txt_quote_eng_chack.text = quoteEn
         txt_author_eng_chack.text = getString(R.string.chack_norris_en)
         Picasso.get()
             .load(icon)

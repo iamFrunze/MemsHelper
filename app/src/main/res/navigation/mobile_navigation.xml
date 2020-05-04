@@ -12,8 +12,18 @@
         android:label="@string/menu_motivation"
         tools:layout="@layout/fragment_motivation" />
     <fragment
-        android:id="@+id/chackNorrisFragment"
+        android:id="@+id/nav_chack"
         android:name="com.byfrunze.memshelper.fragments.ChackNorrisFragment"
-        android:label="fragment_chack_norris"
+        android:label="@string/chack_norris_ru"
         tools:layout="@layout/fragment_chack_norris" />
+    <fragment
+        android:id="@+id/nav_advice"
+        android:name="com.byfrunze.memshelper.fragments.AdviceSlipFragment"
+        android:label="@string/advice_slip"
+        tools:layout="@layout/fragment_advice_slip" />
+    <fragment
+        android:id="@+id/nav_programming"
+        android:name="com.byfrunze.memshelper.fragments.ProgrammingFragment"
+        android:label="fragment_programming"
+        tools:layout="@layout/fragment_programming" />
 </navigation>

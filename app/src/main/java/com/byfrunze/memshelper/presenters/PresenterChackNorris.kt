@@ -27,4 +27,8 @@ class PresenterChackNorris : MvpPresenter<ViewChackNorris>() {
     fun errorLoading(textError: String?) {
         viewState.errorLoad(textError)
     }
+
+    fun refreshLoadQuotes() {
+        ProviderChackNorris(this).loadQuotesEn()
+    }
 }

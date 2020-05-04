@@ -28,4 +28,8 @@ class PresenterMotivation : MvpPresenter<ViewMotivation>() {
         viewState.errorLoad(textError)
     }
 
+    fun refreshLoadQuotes() {
+        ProviderMotivation(this).loadQuotesEn()
+    }
+
 }
