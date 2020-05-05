@@ -27,4 +27,8 @@ class PresenterHistory : MvpPresenter<ViewHistory>() {
     fun searchInfo(query: String) {
         ProviderHistory(this).searchQuotes(query = query)
     }
+
+    fun refreshLoadQuotes() {
+        ProviderHistory(this).loadQuotes()
+    }
 }

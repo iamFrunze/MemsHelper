@@ -75,9 +75,10 @@ class MainActivity : AppCompatActivity(), RealmController {
     }
 
     private fun saveQuote() {
-        var PrKey: Long = realm.where<ModelSaveQuotes>().count()
+        val PrKey: Long = realm.where<ModelSaveQuotes>().count() + 1
         realm.beginTransaction()
-        val quotes = realm.createObject<ModelSaveQuotes>(PrKey)
+        val quotes = realm.createObject<ModelSaveQuotes>()
+        quotes.id = PrKey
         quotes.from = from
         quotes.quoteEn = quoteEn
         quotes.quoteRu = quoteRu
