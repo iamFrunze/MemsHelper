@@ -20,6 +20,7 @@ class PresenterAdviceSlip : MvpPresenter<ViewAdviceSlip>() {
 
     fun completeLoadingRu(quoteRu: String) {
         viewState.completeLoadingRu(quoteRu = quoteRu)
+        viewState.saveQuote()
     }
 
     fun refreshLoadQuotes() {

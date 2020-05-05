@@ -10,4 +10,6 @@ interface ViewAdviceSlip : MvpView {
     fun errorLoad(textError: String?)
     fun completeLoadingEn(quoteEn: String)
     fun completeLoadingRu(quoteRu: String)
+    fun saveQuote()
+
 }

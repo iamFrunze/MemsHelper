@@ -17,4 +17,7 @@
     <string name="chack_norris_en">Chack Norris</string>
     <string name="advice_slip">Советы на каждый день</string>
     <string name="programming_quotes">IT цитаты</string>
+    <string name="history">История</string>
+    <string name="empty_history">У Вас нету сохраненок</string>
+    <string name="search">Поиск</string>
 </resources>

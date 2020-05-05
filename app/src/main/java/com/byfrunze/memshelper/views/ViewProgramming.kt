@@ -10,5 +10,7 @@ interface ViewProgramming : MvpView {
     fun errorLoad(textError: String?)
     fun completeLoadingEn(quoteEn: String, quoteAuthorEn: String)
     fun completeLoadingRu(quoteRu: String, quoteAuthorRu: String)
+    fun saveQuote()
+
 
 }

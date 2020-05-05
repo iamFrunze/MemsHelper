@@ -51,10 +51,10 @@ class ProviderMotivation(val presenter: PresenterMotivation) {
             )
     }
 
-    private fun loadTranslate(text: String, quoteAuthor: String) {
+    private fun loadTranslate(quoteEn: String, quoteAuthor: String) {
         disposable = apiServiceTranslate.translate(
             key = YA_API_KEY,
-            text = text,
+            text = quoteEn,
             lang = YA_LANG
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

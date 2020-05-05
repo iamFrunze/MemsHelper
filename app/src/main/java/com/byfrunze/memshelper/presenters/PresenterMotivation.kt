@@ -22,6 +22,8 @@ class PresenterMotivation : MvpPresenter<ViewMotivation>() {
         quoteAuthorRu: String = ""
     ) {
         viewState.completeLoadingRu(quoteRu = quoteRu, quoteAuthorRu = quoteAuthorRu)
+        viewState.saveQuote()
+
     }
 
     fun errorLoading(textError: String?) {

@@ -9,4 +9,5 @@ object Results {
     data class Slip(val advice: String, val slip_id: String)
 
     data class ProgrammingQuotes(val en: String, val author: String)
+
 }

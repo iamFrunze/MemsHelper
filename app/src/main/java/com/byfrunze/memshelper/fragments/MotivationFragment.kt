@@ -1,15 +1,17 @@
 package com.byfrunze.memshelper.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.byfrunze.memshelper.R
-import com.byfrunze.memshelper.presenters.PresenterAdviceSlip
+import com.byfrunze.memshelper.data.RealmController
+import com.byfrunze.memshelper.data.RealmDB
 import com.byfrunze.memshelper.presenters.PresenterMotivation
 import com.byfrunze.memshelper.views.ViewMotivation
 import kotlinx.android.synthetic.main.fragment_motivation.*
@@ -23,6 +25,7 @@ class MotivationFragment : MvpAppCompatFragment(), ViewMotivation {
 
     @InjectPresenter
     lateinit var presenter: PresenterMotivation
+    lateinit var realmController: RealmController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +42,7 @@ class MotivationFragment : MvpAppCompatFragment(), ViewMotivation {
             presenter.loadQuotes()
         }
 
-        txt_ya.setOnClickListener{
+        txt_ya.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://translate.yandex.ru/")))
         }
 
@@ -47,6 +50,13 @@ class MotivationFragment : MvpAppCompatFragment(), ViewMotivation {
             presenter.refreshLoadQuotes()
             swipe_refresh_motivation.isRefreshing = false
         }
+
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        realmController = context as RealmController
     }
 
     override fun load() {
@@ -74,5 +84,18 @@ class MotivationFragment : MvpAppCompatFragment(), ViewMotivation {
         btn_next_motivation.isEnabled = true
         txt_quote_ru_motivation.text = quoteRu
         txt_author_ru_motivation.text = quoteAuthorRu
+    }
+
+    override fun saveQuote() {
+        val from = getString(R.string.menu_motivation)
+        val quoteEn = txt_quote_eng_motivation.text.toString()
+        val quoteRu = txt_quote_ru_motivation.text.toString()
+        val author = txt_author_eng_motivation.text.toString()
+        realmController.transQuote(from = from, quoteEn = quoteEn, quoteRu = quoteRu, author = author)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RealmDB.initDB().close()
     }
 }

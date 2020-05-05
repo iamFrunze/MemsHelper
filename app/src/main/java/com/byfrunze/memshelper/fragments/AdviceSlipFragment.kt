@@ -1,5 +1,6 @@
 package com.byfrunze.memshelper.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.afollestad.materialdialogs.MaterialDialog
 import com.byfrunze.memshelper.R
+import com.byfrunze.memshelper.data.RealmController
+import com.byfrunze.memshelper.data.RealmDB
 import com.byfrunze.memshelper.presenters.PresenterAdviceSlip
 import com.byfrunze.memshelper.views.ViewAdviceSlip
 import kotlinx.android.synthetic.main.fragment_advice_slip.*
@@ -22,6 +25,8 @@ class AdviceSlipFragment : MvpAppCompatFragment(), ViewAdviceSlip {
 
     @InjectPresenter
     lateinit var presenter: PresenterAdviceSlip
+    lateinit var realmController: RealmController
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +52,11 @@ class AdviceSlipFragment : MvpAppCompatFragment(), ViewAdviceSlip {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        realmController = context as RealmController
+    }
+
     override fun load() {
         cpv_advice_loader.visibility = View.VISIBLE
         btn_next_advice.isEnabled = false
@@ -70,5 +80,22 @@ class AdviceSlipFragment : MvpAppCompatFragment(), ViewAdviceSlip {
         cpv_advice_loader.visibility = View.GONE
         btn_next_advice.isEnabled = true
         txt_quote_ru_advice.text = quoteRu
+    }
+
+    override fun saveQuote() {
+        val from = getString(R.string.advice_slip)
+        val quoteEn = txt_quote_eng_advice.text.toString()
+        val quoteRu = txt_quote_ru_advice.text.toString()
+        realmController.transQuote(
+            from = from,
+            quoteEn = quoteEn,
+            quoteRu = quoteRu,
+            author = ""
+        )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RealmDB.initDB().close()
     }
 }

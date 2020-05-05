@@ -22,6 +22,7 @@ class PresenterChackNorris : MvpPresenter<ViewChackNorris>() {
         quoteRu: String
     ) {
         viewState.completeLoadingRu(quoteRu = quoteRu)
+        viewState.saveQuote()
     }
 
     fun errorLoading(textError: String?) {

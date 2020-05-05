@@ -10,4 +10,6 @@ interface ViewChackNorris: MvpView {
     fun errorLoad(textError: String?)
     fun completeLoadingEn(icon:String, quoteEn: String)
     fun completeLoadingRu(quoteRu: String)
+    fun saveQuote()
+
 }

@@ -20,6 +20,8 @@ class PresenterProgramming : MvpPresenter<ViewProgramming>() {
 
     fun completeLoadingRu(quoteRu: String, quoteAuthorRu: String) {
         viewState.completeLoadingRu(quoteRu = quoteRu, quoteAuthorRu = quoteAuthorRu)
+        viewState.saveQuote()
+
     }
 
     fun refreshLoadQuotes() {

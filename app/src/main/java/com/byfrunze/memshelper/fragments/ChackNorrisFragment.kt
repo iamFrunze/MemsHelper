@@ -1,18 +1,23 @@
 package com.byfrunze.memshelper.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.byfrunze.memshelper.R
+import com.byfrunze.memshelper.data.RealmController
+import com.byfrunze.memshelper.data.RealmDB
 import com.byfrunze.memshelper.presenters.PresenterChackNorris
 import com.byfrunze.memshelper.views.ViewChackNorris
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_chack_norris.*
+import kotlinx.android.synthetic.main.fragment_chack_norris.txt_ya
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
@@ -23,6 +28,7 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
 
     @InjectPresenter
     lateinit var presenter: PresenterChackNorris
+    lateinit var realmController: RealmController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +53,11 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
             presenter.refreshLoadQuotes()
             swipe_refresh_chack.isRefreshing = false
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        realmController = context as RealmController
     }
 
     override fun load() {
@@ -78,5 +89,23 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
         btn_next_chack.isEnabled = true
         txt_quote_ru_chack.text = quoteRu
         txt_author_ru_chack.text = getString(R.string.chack_norris_ru)
+    }
+
+    override fun saveQuote() {
+        val from = getString(R.string.chack_norris_ru)
+        val quoteEn = txt_quote_eng_chack.text.toString()
+        val quoteRu = txt_quote_ru_chack.text.toString()
+        val author = txt_author_eng_chack.text.toString()
+        realmController.transQuote(
+            from = from,
+            quoteEn = quoteEn,
+            quoteRu = quoteRu,
+            author = author
+        )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        RealmDB.initDB().close()
     }
 }

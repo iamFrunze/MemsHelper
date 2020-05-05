@@ -15,7 +15,7 @@ class ProviderProgramming(val presenter: PresenterProgramming) {
     private val YA_LANG = "en-ru"
 
     private val apiServiceQuote by lazy {
-        RetroService.createRetrofit("https://api.adviceslip.com/")
+        RetroService.createRetrofit("https://programming-quotes-api.herokuapp.com/")
             .create(ProgrammingApi::class.java)
     }
     private val apiServiceTranslate by lazy {
