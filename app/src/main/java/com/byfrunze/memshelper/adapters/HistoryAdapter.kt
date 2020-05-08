@@ -1,6 +1,5 @@
 package com.byfrunze.memshelper.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,22 +8,14 @@ import com.byfrunze.memshelper.R
 import com.byfrunze.memshelper.data.ModelSaveQuotes
 import com.byfrunze.memshelper.data.RealmDB
 import com.byfrunze.memshelper.helpers.ItemTouchHelperAdapter
-import io.realm.RealmList
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.cell_history.view.*
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(), ItemTouchHelperAdapter {
 
-
     val realm = RealmDB.initDB()
     private val listHistory = ArrayList<ModelSaveQuotes>()
-
-
 
     override fun onItemDismiss(position: Int) {
         realm.executeTransaction { realm ->

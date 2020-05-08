@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_text_size"
+        icon="@drawable/ic_text_fields_white_24dp"
+        title="Size" />
+    <tab
+        id="@+id/tab_text_color"
+        icon="@drawable/ic_format_color_text_white_24dp"
+        title="Color" />
+    <tab
+        id="@+id/tab_text_font"
+        icon="@drawable/ic_font_download_white_24dp"
+        title="Fonts" />
+
+    <tab
+        id="@+id/tab_share"
+        icon="@drawable/ic_share_white_24dp"
+        title="Share" />
+
+
+</tabs>

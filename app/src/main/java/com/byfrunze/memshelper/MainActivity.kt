@@ -1,10 +1,13 @@
 package com.byfrunze.memshelper
 
+import android.graphics.Color
 import android.os.Bundle
+import android.os.StrictMode
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginBottom
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -32,9 +35,11 @@ class MainActivity : AppCompatActivity(), RealmController {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
         setContentView(R.layout.activity_main)
+        toolbar.setTitleTextColor(Color.BLACK)
         setSupportActionBar(toolbar)
-
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -51,7 +56,9 @@ class MainActivity : AppCompatActivity(), RealmController {
         nav_view.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.nav_history)
+            if (destination.id == R.id.nav_history
+                || destination.id == R.id.nav_create_mem
+            )
                 fab.visibility = View.GONE
             else fab.visibility = View.VISIBLE
         }

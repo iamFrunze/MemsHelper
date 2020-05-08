@@ -20,4 +20,10 @@
     <string name="history">История</string>
     <string name="empty_history">У Вас нету сохраненок</string>
     <string name="search">Поиск</string>
+    <string name="create_mem">Создай свой Мем</string>
+    <string name="choose_color">Choose color</string>
+    <string name="color_hex_code">Color HEX code</string>
+    <string name="ok">Ok</string>
+    <string name="download">Скачать</string>
+    <string name="send">Отправить</string>
 </resources>

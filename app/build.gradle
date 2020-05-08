@@ -81,4 +81,13 @@ dependencies {
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //bottombar
+    implementation 'com.roughike:bottom-bar:2.3.1'
+
+    //seekbar
+    implementation 'com.xw.repo:bubbleseekbar:3.20-lite'
+
+    //colorPicker
+    implementation 'com.github.duanhong169:colorpicker:1.1.6'
 }
