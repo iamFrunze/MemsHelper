@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -90,4 +91,7 @@ dependencies {
 
     //colorPicker
     implementation 'com.github.duanhong169:colorpicker:1.1.6'
+
+    //firebase
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
 }

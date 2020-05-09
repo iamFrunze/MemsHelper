@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/Theme.MaterialComponents.Light"
+    tools:context=".fragments.SettingsWidget">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_el"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <RadioButton
+            android:id="@+id/rb_motivation_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="rb_motivation"
+            android:text="@string/menu_motivation" />
+
+        <RadioButton
+            android:id="@+id/rb_chack_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="rb_chack"
+            android:text="@string/chack_norris_ru" />
+
+        <RadioButton
+            android:id="@+id/rb_advice_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="rb_advice"
+            android:text="@string/advice_slip" />
+
+        <RadioButton
+            android:id="@+id/rb_prog_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="rb_prog"
+            android:text="@string/programming_quotes" />
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_widget_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/save" />
+
+</LinearLayout>

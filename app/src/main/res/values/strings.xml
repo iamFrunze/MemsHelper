@@ -26,4 +26,12 @@
     <string name="ok">Ok</string>
     <string name="download">Скачать</string>
     <string name="send">Отправить</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="settings_widget">Настройка виджета</string>
+    <string name="choose_el">Выберите цитаты для показа в виджете</string>
+    <string name="save">Сохранить</string>
+    <string name="eng">Eng</string>
+    <string name="ru">Ru</string>
+    <string name="author">author</string>
 </resources>

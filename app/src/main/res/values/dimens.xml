@@ -7,4 +7,10 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="mcv_quotes_height">160dp</dimen>
     <dimen name="loaded_size">40dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
 </resources>

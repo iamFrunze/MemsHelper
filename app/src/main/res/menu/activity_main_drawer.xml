@@ -23,6 +23,9 @@
         <item
             android:id="@+id/nav_create_mem"
             android:title="@string/create_mem" />
+        <item
+            android:id="@+id/nav_settings_widget"
+            android:title="@string/settings_widget" />
 
     </group>
 </menu>

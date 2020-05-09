@@ -36,4 +36,9 @@
         android:name="com.byfrunze.memshelper.fragments.CreateMemFragment"
         android:label="@string/create_mem"
         tools:layout="@layout/fragment_create_mem" />
+    <fragment
+        android:id="@+id/nav_settings_widget"
+        android:name="com.byfrunze.memshelper.fragments.SettingsWidget"
+        android:label="@string/settings_widget"
+        tools:layout="@layout/fragment_settings_widget" />
 </navigation>

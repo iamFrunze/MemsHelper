@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "6024704177",
+    "firebase_url": "https://memhelper-bd09f.firebaseio.com",
+    "project_id": "memhelper-bd09f",
+    "storage_bucket": "memhelper-bd09f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6024704177:android:10a0d41a0431d297387290",
+        "android_client_info": {
+          "package_name": "com.byfrunze.memshelper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6024704177-7ejf3th7som00bulvd4k4boh6bqi8o9m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.byfrunze.memshelper",
+            "certificate_hash": "3b7bdcae332c54b4202e387f2b0a0aec1f917dc8"
+          }
+        },
+        {
+          "client_id": "6024704177-ss4249a6ng1invj1t1odf96hj50vcg09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1NAxMzmwVjkolVU3jFLmlcP1jSzob2S0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6024704177-ss4249a6ng1invj1t1odf96hj50vcg09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
