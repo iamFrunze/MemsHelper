@@ -4,31 +4,28 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.byfrunze.memshelper.R
 import com.byfrunze.memshelper.data.RealmController
 import com.byfrunze.memshelper.data.RealmDB
-import com.byfrunze.memshelper.presenters.PresenterChackNorris
-import com.byfrunze.memshelper.views.ViewChackNorris
-import com.squareup.picasso.Picasso
+import com.byfrunze.memshelper.presenters.PresenterProgramming
+import com.byfrunze.memshelper.views.ViewProgramming
 import kotlinx.android.synthetic.main.cell_card_with_q_author.*
-import kotlinx.android.synthetic.main.fragment_chack_norris.*
-import kotlinx.android.synthetic.main.fragment_chack_norris.txt_ya
+import kotlinx.android.synthetic.main.fragment_programming.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
 /**
  * A simple [Fragment] subclass.
  */
-class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
+class ProgrammingFragment : MvpAppCompatFragment(), ViewProgramming {
 
     @InjectPresenter
-    lateinit var presenter: PresenterChackNorris
+    lateinit var presenter: PresenterProgramming
     lateinit var realmController: RealmController
 
     override fun onCreateView(
@@ -36,13 +33,13 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chack_norris, container, false)
+        return inflater.inflate(R.layout.fragment_programming, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.loadQuotes()
-        btn_next_chack.setOnClickListener {
+        btn_next_programming.setOnClickListener {
             presenter.loadQuotes()
         }
 
@@ -50,9 +47,9 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://translate.yandex.ru/")))
         }
 
-        swipe_refresh_chack.setOnRefreshListener {
+        swipe_refresh_programming.setOnRefreshListener {
             presenter.refreshLoadQuotes()
-            swipe_refresh_chack.isRefreshing = false
+            swipe_refresh_programming.isRefreshing = false
         }
 
         btn_translate.setOnClickListener{
@@ -66,8 +63,8 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
     }
 
     override fun load() {
-        cpv_chack_loader.visibility = View.VISIBLE
-        btn_next_chack.isEnabled = false
+        cpv_programming_loader.visibility = View.VISIBLE
+        btn_next_programming.isEnabled = false
     }
 
     override fun errorLoad(textError: String?) {
@@ -78,26 +75,23 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
         }
     }
 
-    override fun completeLoadingEn(icon: String, quoteEn: String) {
-        cpv_chack_loader.visibility = View.GONE
-        txt_author_eng.isEnabled = true
+    override fun completeLoadingEn(quoteEn: String, quoteAuthorEn: String) {
+        mcv_rus.visibility = View.GONE
+        cpv_programming_loader.visibility = View.GONE
+        btn_next_programming.isEnabled = true
         txt_quote_eng.text = quoteEn
-        txt_author_eng.text = getString(R.string.chack_norris_en)
-        Picasso.get()
-            .load(icon)
-            .placeholder(R.drawable.ic_uncheck)
-            .into(img_chack)
+        txt_author_eng.text = quoteAuthorEn
     }
 
-    override fun completeLoadingRu(quoteRu: String) {
-        cpv_chack_loader.visibility = View.GONE
-        btn_next_chack.isEnabled = true
+    override fun completeLoadingRu(quoteRu: String, quoteAuthorRu: String) {
+        cpv_programming_loader.visibility = View.GONE
+        btn_next_programming.isEnabled = true
         txt_quote_rus.text = quoteRu
-        txt_author_rus.text = getString(R.string.chack_norris_ru)
+        txt_author_rus.text = quoteAuthorRu
     }
 
     override fun saveQuote() {
-        val from = getString(R.string.chack_norris_ru)
+        val from = getString(R.string.programming_quotes)
         val quoteEn = txt_quote_eng.text.toString()
         val quoteRu = txt_quote_rus.text.toString()
         val author = txt_author_eng.text.toString()

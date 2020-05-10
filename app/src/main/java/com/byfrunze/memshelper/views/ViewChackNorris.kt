@@ -11,5 +11,6 @@ interface ViewChackNorris: MvpView {
     fun completeLoadingEn(icon:String, quoteEn: String)
     fun completeLoadingRu(quoteRu: String)
     fun saveQuote()
+    fun translateQuote()
 
 }

@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_widget"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="@dimen/widget_margin">
+
 
     <TextView
         android:id="@+id/appwidget_text_eng"
@@ -12,22 +13,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:contentDescription="@string/eng"
-        android:text="@string/eng"
-        android:textStyle="bold|italic" />
+        android:textSize="16sp"
+        android:text="@string/eng" />
 
     <TextView
         android:id="@+id/appwidget_text_ru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:textSize="16sp"
         android:contentDescription="@string/ru"
-        android:text="@string/ru"
-        android:textStyle="bold|italic" />
+        android:text="@string/ru" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black">
+
 
         <TextView
             android:id="@+id/appwidget_text_author"
@@ -37,7 +35,6 @@
             android:contentDescription="@string/author"
             android:text="@string/author"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold|italic" />
-    </LinearLayout>
+            android:textSize="14sp"
+            android:textStyle="italic" />
 </LinearLayout>

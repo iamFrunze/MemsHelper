@@ -1,17 +1,13 @@
 package com.byfrunze.memshelper.fragments
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -20,25 +16,18 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.byfrunze.memshelper.R
 import com.byfrunze.memshelper.adapters.FontAdapter
 import com.byfrunze.memshelper.adapters.TextCreateAdapter
+import com.flask.colorpicker.ColorPickerView
+import com.flask.colorpicker.builder.ColorPickerDialogBuilder
 import com.xw.repo.BubbleSeekBar
 import kotlinx.android.synthetic.main.fragment_create_mem.*
-import kotlinx.android.synthetic.main.nav_header_main.*
-import top.defaults.colorpicker.ColorPickerPopup
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
 import java.io.OutputStream
-import java.lang.Exception
-import java.security.Permission
-import java.sql.Time
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -46,6 +35,7 @@ import kotlin.collections.ArrayList
 /**
  * A simple [Fragment] subclass.
  */
+@Suppress("DEPRECATION")
 class CreateMemFragment : Fragment() {
 
     private var checkSender = false
@@ -77,6 +67,8 @@ class CreateMemFragment : Fragment() {
         createRecycleViewCreate()
         createRecycleView()
         optionBottomMenu()
+
+
 
     }
 
@@ -174,11 +166,11 @@ class CreateMemFragment : Fragment() {
 
     private fun savePicture(bitmap: Bitmap, folderToSave: String): File? {
 
-        var fOut: OutputStream? = null
-        var time = Date()
+        val fOut: OutputStream
+        val time = Date()
 
         try {
-            var file = File(folderToSave, "$time.jpg")
+            val file = File(folderToSave, "$time.jpg")
             fOut = FileOutputStream(file)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut)
             fOut.flush()
@@ -307,51 +299,30 @@ class CreateMemFragment : Fragment() {
     }
 
     private fun chooseColorText(txt: TextView?) {
-        var colorText: String
-        btn_ok_color_create.isEnabled = false
-        edt_color_hex_create.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                btn_ok_color_create.isEnabled = edt_color_hex_create.text.contains("#") &&
-                        edt_color_hex_create.text.count() == 9
-            }
-
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
-                btn_ok_color_create.isEnabled = edt_color_hex_create.text.contains("#") &&
-                        edt_color_hex_create.text.count() == 9
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                btn_ok_color_create.isEnabled = edt_color_hex_create.text.contains("#") &&
-                        edt_color_hex_create.text.count() == 9
-            }
-        })
-        btn_ok_color_create.setOnClickListener {
-            colorText = edt_color_hex_create.text.toString()
-            txt?.setTextColor(Color.parseColor(colorText))
-        }
-
         btn_choose_color_create.setOnClickListener {
-            ColorPickerPopup.Builder(requireContext())
-                .initialColor(Color.BLACK)
-                .enableBrightness(true)
-                .enableAlpha(true)
-                .okTitle("Choose")
-                .cancelTitle("Cancel")
-                .showIndicator(true)
-                .showValue(true)
+            ColorPickerDialogBuilder
+                .with(context)
+                .setTitle("Выберите цвет")
+                .initialColor(Color.RED)
+                .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                .density(12)
+                .setOnColorSelectedListener {
+                    txt?.setTextColor(it)
+                }
+                .setPositiveButton(
+                    "Выбрать"
+                ) { d, lastSelectedColor, _ ->
+                    txt?.setTextColor(lastSelectedColor)
+                }
+                .setNegativeButton(
+                    "Отмена"
+                ) { dialog, _ ->
+                    dialog.dismiss()
+                }
                 .build()
-                .show(it, object : ColorPickerPopup.ColorPickerObserver() {
-                    override fun onColorPicked(color: Int) {
-                        it.setBackgroundColor(color)
-                        txt?.setTextColor(color)
-                    }
-                })
+                .show()
         }
+
     }
 
 }

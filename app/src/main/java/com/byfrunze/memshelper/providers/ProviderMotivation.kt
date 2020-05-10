@@ -43,7 +43,6 @@ class ProviderMotivation(val presenter: PresenterMotivation) {
                         quoteEn = it.quoteText,
                         quoteAuthorEn = it.quoteAuthor
                     )
-                    loadTranslate(it.quoteText, quoteAuthor = it.quoteAuthor)
                 },
                 {
                     presenter.errorLoading(textError = it.localizedMessage)
@@ -51,7 +50,7 @@ class ProviderMotivation(val presenter: PresenterMotivation) {
             )
     }
 
-    private fun loadTranslate(quoteEn: String, quoteAuthor: String) {
+    fun loadTranslate(quoteEn: String, quoteAuthor: String) {
         disposable = apiServiceTranslate.translate(
             key = YA_API_KEY,
             text = quoteEn,

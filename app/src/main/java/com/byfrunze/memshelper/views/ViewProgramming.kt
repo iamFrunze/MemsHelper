@@ -11,6 +11,7 @@ interface ViewProgramming : MvpView {
     fun completeLoadingEn(quoteEn: String, quoteAuthorEn: String)
     fun completeLoadingRu(quoteRu: String, quoteAuthorRu: String)
     fun saveQuote()
+    fun translateQuote()
 
 
 }

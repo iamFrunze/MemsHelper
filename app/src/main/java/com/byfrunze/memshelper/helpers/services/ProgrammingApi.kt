@@ -5,6 +5,6 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 
 interface ProgrammingApi {
-    @GET("quotes/random")
+    @GET("quotes/random/lang/ru")
     fun programmingQuotes(): Observable<Results.ProgrammingQuotes>
 }

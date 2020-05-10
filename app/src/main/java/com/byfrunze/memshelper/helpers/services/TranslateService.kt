@@ -7,6 +7,13 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface TranslateService {
+    //    @FormUrlEncoded
+//    @POST("/api/v1.5/tr.json/translate")
+//    fun translate(
+//        @Field("key") key: String,
+//        @Field("text") text: String,
+//        @Field("lang") lang: String
+//    ): Observable<Results.TranslateQuotes>
     @FormUrlEncoded
     @POST("/api/v1.5/tr.json/translate")
     fun translate(
@@ -14,4 +21,5 @@ interface TranslateService {
         @Field("text") text: String,
         @Field("lang") lang: String
     ): Observable<Results.TranslateQuotes>
+
 }

@@ -14,6 +14,7 @@ import com.byfrunze.memshelper.data.RealmController
 import com.byfrunze.memshelper.data.RealmDB
 import com.byfrunze.memshelper.presenters.PresenterMotivation
 import com.byfrunze.memshelper.views.ViewMotivation
+import kotlinx.android.synthetic.main.cell_card_with_q_author.*
 import kotlinx.android.synthetic.main.fragment_motivation.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -50,7 +51,9 @@ class MotivationFragment : MvpAppCompatFragment(), ViewMotivation {
             presenter.refreshLoadQuotes()
             swipe_refresh_motivation.isRefreshing = false
         }
-
+        btn_translate.setOnClickListener{
+            presenter.translateText(txt = txt_quote_eng.text.toString(), author = txt_author_eng.text.toString())
+        }
 
     }
 
@@ -73,25 +76,35 @@ class MotivationFragment : MvpAppCompatFragment(), ViewMotivation {
     }
 
     override fun completeLoadingEn(quoteEn: String, quoteAuthorEn: String) {
+        mcv_rus.visibility = View.GONE
         cpv_motivation_loader.visibility = View.GONE
         btn_next_motivation.isEnabled = true
-        txt_quote_eng_motivation.text = quoteEn
-        txt_author_eng_motivation.text = quoteAuthorEn
+        txt_quote_eng.text = quoteEn
+        txt_author_eng.text = quoteAuthorEn
     }
 
     override fun completeLoadingRu(quoteRu: String, quoteAuthorRu: String) {
         cpv_motivation_loader.visibility = View.GONE
         btn_next_motivation.isEnabled = true
-        txt_quote_ru_motivation.text = quoteRu
-        txt_author_ru_motivation.text = quoteAuthorRu
+        txt_quote_rus.text = quoteRu
+        txt_author_rus.text = quoteAuthorRu
     }
 
     override fun saveQuote() {
         val from = getString(R.string.menu_motivation)
-        val quoteEn = txt_quote_eng_motivation.text.toString()
-        val quoteRu = txt_quote_ru_motivation.text.toString()
-        val author = txt_author_eng_motivation.text.toString()
-        realmController.transQuote(from = from, quoteEn = quoteEn, quoteRu = quoteRu, author = author)
+        val quoteEn = txt_quote_eng.text.toString()
+        val quoteRu = txt_quote_rus.text.toString()
+        val author = txt_author_eng.text.toString()
+        realmController.transQuote(
+            from = from,
+            quoteEn = quoteEn,
+            quoteRu = quoteRu,
+            author = author
+        )
+    }
+
+    override fun translateQuote() {
+        mcv_rus.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {

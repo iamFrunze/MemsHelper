@@ -143,26 +143,12 @@
             android:layout_height="wrap_content"
             android:background="@color/black"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:visibility="gone">
+            android:padding="16dp">
 
-            <EditText
-                android:id="@+id/edt_color_hex_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/color_hex_code" />
-
-            <Button
-                android:id="@+id/btn_ok_color_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:text="@string/ok" />
 
             <Button
                 android:id="@+id/btn_choose_color_create"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/choose_color" />

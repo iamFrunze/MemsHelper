@@ -13,6 +13,7 @@
     <string name="menu_motivation">Мотивация</string>
     <string name="next_quotes">Дальше</string>
     <string name="ya_lic">Переведено сервисом «Яндекс.Переводчик»</string>
+    <string name="ya_lic_btn">Перевести с помощью «Яндекс.Переводчик»</string>
     <string name="chack_norris_ru">Чак Норрис</string>
     <string name="chack_norris_en">Chack Norris</string>
     <string name="advice_slip">Советы на каждый день</string>

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.RadioGroup
+import android.widget.Toast
 import com.byfrunze.memshelper.R
 import com.byfrunze.memshelper.data.ModelSaveQuotes
 import com.byfrunze.memshelper.data.RealmDB
@@ -53,7 +54,7 @@ class SettingsWidget : Fragment() {
         activity?.let {
             pref = it.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
-            rg_settings.setOnCheckedChangeListener { group, checkedId ->
+            rg_settings.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     R.id.rb_motivation_settings -> getPref = RB_MOT
                     R.id.rb_advice_settings -> getPref = RB_ADVICE
@@ -64,9 +65,14 @@ class SettingsWidget : Fragment() {
             }
 
             btn_save_widget_settings.setOnClickListener {
-                val editor = pref.edit()
-                editor.putString(APP_PREFERENCES_QUOTE, getPref)
-                editor.apply()
+                try {
+                    val editor = pref.edit()
+                    editor.putString(APP_PREFERENCES_QUOTE, getPref)
+                    editor.apply()
+                    Toast.makeText(requireContext(), "Сохранено", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Ошибка", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }

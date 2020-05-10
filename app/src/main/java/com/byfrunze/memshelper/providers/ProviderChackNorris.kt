@@ -36,7 +36,6 @@ class ProviderChackNorris(val presenter: PresenterChackNorris) {
                         icon = it.icon_url,
                         quoteEn = it.value
                     )
-                    loadTranslate(it.value)
                 },
                 {
                     presenter.errorLoading(textError = it.localizedMessage)
@@ -44,7 +43,7 @@ class ProviderChackNorris(val presenter: PresenterChackNorris) {
             )
     }
 
-    private fun loadTranslate(text: String) {
+    fun loadTranslate(text: String) {
         disposable = apiServiceTranslate.translate(
             key = YA_API_KEY,
             text = text,

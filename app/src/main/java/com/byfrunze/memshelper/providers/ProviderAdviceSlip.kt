@@ -1,5 +1,6 @@
 package com.byfrunze.memshelper.providers
 
+import android.util.Log
 import com.byfrunze.memshelper.helpers.RetroService
 import com.byfrunze.memshelper.helpers.services.AdviceSlipApi
 import com.byfrunze.memshelper.helpers.services.MotivationApi
@@ -33,7 +34,6 @@ class ProviderAdviceSlip(val presenter: PresenterAdviceSlip) {
                     presenter.completeLoadingEn(
                         quoteEn = it.slip.advice
                     )
-                    loadTranslate(it.slip.advice)
                 },
                 {
                     presenter.errorLoading(textError = it.localizedMessage)
@@ -41,7 +41,7 @@ class ProviderAdviceSlip(val presenter: PresenterAdviceSlip) {
             )
     }
 
-    private fun loadTranslate(text: String) {
+    fun loadTranslate(text: String) {
         disposable = apiServiceTranslate.translate(
             key = YA_API_KEY,
             text = text,
@@ -53,6 +53,7 @@ class ProviderAdviceSlip(val presenter: PresenterAdviceSlip) {
                     presenter.completeLoadingRu(
                         quoteRu = it.text[0]
                     )
+                    Log.i("TRANS", it.text.toString())
                 },
                 {
                     presenter.errorLoading(textError = it.localizedMessage)

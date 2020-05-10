@@ -11,5 +11,6 @@ interface ViewAdviceSlip : MvpView {
     fun completeLoadingEn(quoteEn: String)
     fun completeLoadingRu(quoteRu: String)
     fun saveQuote()
+    fun translateQuote()
 
 }

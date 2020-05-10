@@ -12,6 +12,7 @@ class PresenterProgramming : MvpPresenter<ViewProgramming>() {
 
     fun completeLoadingEn(quoteEn: String, quoteAuthor: String) {
         viewState.completeLoadingEn(quoteEn = quoteEn, quoteAuthorEn = quoteAuthor)
+        viewState.saveQuote()
     }
 
     fun errorLoading(textError: String?) {
@@ -26,5 +27,12 @@ class PresenterProgramming : MvpPresenter<ViewProgramming>() {
 
     fun refreshLoadQuotes() {
         ProviderProgramming(this).loadQuotesEn()
+    }
+
+    fun translateText(txt: String, author: String) {
+        viewState.load()
+        viewState.translateQuote()
+        ProviderProgramming(this).loadTranslate(text = txt, quoteAuthor = author)
+
     }
 }

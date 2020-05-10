@@ -15,6 +15,8 @@ class PresenterMotivation : MvpPresenter<ViewMotivation>() {
         quoteAuthorEn: String = ""
     ) {
         viewState.completeLoadingEn(quoteEn = quoteEn, quoteAuthorEn = quoteAuthorEn)
+        viewState.saveQuote()
+
     }
 
     fun completeLoadingRu(
@@ -32,6 +34,13 @@ class PresenterMotivation : MvpPresenter<ViewMotivation>() {
 
     fun refreshLoadQuotes() {
         ProviderMotivation(this).loadQuotesEn()
+    }
+
+    fun translateText(txt: String, author: String) {
+        viewState.load()
+        viewState.translateQuote()
+        ProviderMotivation(this).loadTranslate(quoteEn = txt, quoteAuthor = author)
+
     }
 
 }

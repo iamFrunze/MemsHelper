@@ -4,16 +4,22 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.byfrunze.memshelper.R
 import com.byfrunze.memshelper.data.RealmController
 import com.byfrunze.memshelper.data.RealmDB
 import com.byfrunze.memshelper.presenters.PresenterAdviceSlip
 import com.byfrunze.memshelper.views.ViewAdviceSlip
+import kotlinx.android.synthetic.main.cell_card_with_q_author.*
+import kotlinx.android.synthetic.main.cell_card_with_quote.*
+import kotlinx.android.synthetic.main.cell_card_with_quote.btn_translate
+import kotlinx.android.synthetic.main.cell_card_with_quote.mcv_rus
+import kotlinx.android.synthetic.main.cell_card_with_quote.txt_quote_eng
+import kotlinx.android.synthetic.main.cell_card_with_quote.txt_quote_rus
 import kotlinx.android.synthetic.main.fragment_advice_slip.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -50,6 +56,10 @@ class AdviceSlipFragment : MvpAppCompatFragment(), ViewAdviceSlip {
             presenter.refreshLoadQuotes()
             swipe_refresh_advice.isRefreshing = false
         }
+
+        btn_translate.setOnClickListener {
+            presenter.translateText(txt = txt_quote_eng.text.toString())
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -71,27 +81,32 @@ class AdviceSlipFragment : MvpAppCompatFragment(), ViewAdviceSlip {
     }
 
     override fun completeLoadingEn(quoteEn: String) {
+        mcv_rus.visibility = View.GONE
         cpv_advice_loader.visibility = View.GONE
-        txt_quote_eng_advice.isEnabled = true
-        txt_quote_eng_advice.text = quoteEn
+        txt_quote_eng.isEnabled = true
+        txt_quote_eng.text = quoteEn
     }
 
     override fun completeLoadingRu(quoteRu: String) {
         cpv_advice_loader.visibility = View.GONE
         btn_next_advice.isEnabled = true
-        txt_quote_ru_advice.text = quoteRu
+        txt_quote_rus.text = quoteRu
     }
 
     override fun saveQuote() {
         val from = getString(R.string.advice_slip)
-        val quoteEn = txt_quote_eng_advice.text.toString()
-        val quoteRu = txt_quote_ru_advice.text.toString()
+        val quoteEn = txt_quote_eng.text.toString()
+        val quoteRu = txt_quote_rus.text.toString()
         realmController.transQuote(
             from = from,
             quoteEn = quoteEn,
             quoteRu = quoteRu,
             author = ""
         )
+    }
+
+    override fun translateQuote() {
+        mcv_rus.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {

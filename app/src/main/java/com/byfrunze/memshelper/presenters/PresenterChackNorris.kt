@@ -16,6 +16,7 @@ class PresenterChackNorris : MvpPresenter<ViewChackNorris>() {
         quoteEn: String
     ) {
         viewState.completeLoadingEn(icon = icon, quoteEn = quoteEn)
+        viewState.saveQuote()
     }
 
     fun completeLoadingRu(
@@ -31,5 +32,12 @@ class PresenterChackNorris : MvpPresenter<ViewChackNorris>() {
 
     fun refreshLoadQuotes() {
         ProviderChackNorris(this).loadQuotesEn()
+    }
+
+    fun translateText(txt: String, author: String) {
+        viewState.load()
+        viewState.translateQuote()
+        ProviderChackNorris(this).loadTranslate(text = txt)
+
     }
 }

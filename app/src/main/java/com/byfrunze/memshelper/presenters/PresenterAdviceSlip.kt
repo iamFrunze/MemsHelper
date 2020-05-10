@@ -12,6 +12,7 @@ class PresenterAdviceSlip : MvpPresenter<ViewAdviceSlip>() {
 
     fun completeLoadingEn(quoteEn: String) {
         viewState.completeLoadingEn(quoteEn = quoteEn)
+        viewState.saveQuote()
     }
 
     fun errorLoading(textError: String?) {
@@ -25,6 +26,13 @@ class PresenterAdviceSlip : MvpPresenter<ViewAdviceSlip>() {
 
     fun refreshLoadQuotes() {
         ProviderAdviceSlip(this).loadQuotesEn()
+    }
+
+    fun translateText(txt: String) {
+        viewState.load()
+        viewState.translateQuote()
+        ProviderAdviceSlip(this).loadTranslate(txt)
+
     }
 
 }
