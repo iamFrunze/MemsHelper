@@ -3,20 +3,20 @@
     <tab
         id="@+id/tab_text_size"
         icon="@drawable/ic_text_fields_white_24dp"
-        title="Size" />
+        title="Размер" />
     <tab
         id="@+id/tab_text_color"
         icon="@drawable/ic_format_color_text_white_24dp"
-        title="Color" />
+        title="Цвет" />
     <tab
         id="@+id/tab_text_font"
         icon="@drawable/ic_font_download_white_24dp"
-        title="Fonts" />
+        title="Шрифт" />
 
     <tab
         id="@+id/tab_share"
         icon="@drawable/ic_share_white_24dp"
-        title="Share" />
+        title="Поделиться" />
 
 
 </tabs>

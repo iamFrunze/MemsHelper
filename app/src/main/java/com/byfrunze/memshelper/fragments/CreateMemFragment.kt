@@ -141,7 +141,7 @@ class CreateMemFragment : Fragment() {
 
                     var filePath: File? = null
                     btn_download_create.setOnClickListener {
-                        val bitmap = getScreenShot(coord_content)
+                        val bitmap = getScreenShot(frame_gran)
                         val folderToSave = requireContext().externalMediaDirs[0]
                         filePath =
                             savePicture(bitmap = bitmap, folderToSave = folderToSave.toString())
@@ -224,12 +224,12 @@ class CreateMemFragment : Fragment() {
             mAdapterTextCreate.setupText("Example")
             val newTextView = TextView(requireContext())
             newTextView.text = "Example"
-            coord_content.addView(newTextView)
+            frame_gran.addView(newTextView)
             arrayTextView.add(newTextView)
         }
         mAdapterTextCreate.setOnCloseListener(object : TextCreateAdapter.OnCloseClickListener {
             override fun onClose(position: Int) {
-                coord_content.removeView(arrayTextView[position])
+                frame_gran.removeView(arrayTextView[position])
                 arrayTextView.removeAt(position)
             }
         })

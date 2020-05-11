@@ -1,5 +1,6 @@
 package com.byfrunze.memshelper.fragments
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.afollestad.materialdialogs.MaterialDialog
 import com.byfrunze.memshelper.R
 import com.byfrunze.memshelper.data.RealmController
@@ -42,7 +44,7 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.loadQuotes()
-        btn_next_chack.setOnClickListener {
+        btn_next.setOnClickListener {
             presenter.loadQuotes()
         }
 
@@ -70,7 +72,7 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
 
     override fun load() {
         cpv_chack_loader.visibility = View.VISIBLE
-        btn_next_chack.isEnabled = false
+        btn_next.isEnabled = false
     }
 
     override fun errorLoad(textError: String?) {
@@ -83,21 +85,27 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
 
     override fun completeLoadingEn(icon: String, quoteEn: String) {
         mcv_rus.visibility = View.GONE
+        mcv_eng.visibility = View.VISIBLE
         cpv_chack_loader.visibility = View.GONE
-        btn_next_chack.isEnabled = true
+        btn_next.isEnabled = true
         txt_quote_eng.text = quoteEn
         txt_author_eng.text = getString(R.string.chack_norris_en)
         Picasso.get()
             .load(icon)
             .placeholder(R.drawable.ic_uncheck)
             .into(img_chack)
+        val anim = ObjectAnimator.ofFloat(mcv_eng, "translationX", -1000f, 0f)
+        anim.duration = 300
+        anim.interpolator = FastOutSlowInInterpolator()
+        anim.start()
     }
 
     override fun completeLoadingRu(quoteRu: String) {
         cpv_chack_loader.visibility = View.GONE
-        btn_next_chack.isEnabled = true
+        btn_next.isEnabled = true
         txt_quote_rus.text = quoteRu
         txt_author_rus.text = getString(R.string.chack_norris_ru)
+
     }
 
     override fun saveQuote() {
@@ -115,6 +123,10 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
 
     override fun translateQuote() {
         mcv_rus.visibility = View.VISIBLE
+        val anim = ObjectAnimator.ofFloat(mcv_rus, "translationX", -1000f, 0f)
+        anim.duration = 300
+        anim.interpolator = FastOutSlowInInterpolator()
+        anim.start()
     }
 
     override fun onDestroy() {

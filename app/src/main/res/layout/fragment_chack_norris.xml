@@ -31,7 +31,7 @@
                     android:layout_gravity="center"
                     android:visibility="gone"
                     app:cpv_animAutostart="true"
-                    app:cpv_color="@color/colorPrimary"
+                    app:cpv_color="@color/colorAccent"
                     app:cpv_indeterminate="true" />
 
                 <ImageView
@@ -43,17 +43,6 @@
                     android:adjustViewBounds="true" />
 
                 <include layout="@layout/cell_card_with_q_author" />
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_next_chack"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="@string/next_quotes" />
-
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

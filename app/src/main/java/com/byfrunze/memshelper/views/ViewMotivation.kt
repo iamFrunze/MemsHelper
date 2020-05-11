@@ -13,4 +13,5 @@ interface ViewMotivation : MvpView {
     fun saveQuote()
     fun translateQuote()
 
+
 }

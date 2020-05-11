@@ -1,5 +1,6 @@
 package com.byfrunze.memshelper.fragments
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.afollestad.materialdialogs.MaterialDialog
 import com.byfrunze.memshelper.R
 import com.byfrunze.memshelper.data.RealmController
@@ -39,7 +41,7 @@ class ProgrammingFragment : MvpAppCompatFragment(), ViewProgramming {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.loadQuotes()
-        btn_next_programming.setOnClickListener {
+        btn_next.setOnClickListener {
             presenter.loadQuotes()
         }
 
@@ -52,8 +54,11 @@ class ProgrammingFragment : MvpAppCompatFragment(), ViewProgramming {
             swipe_refresh_programming.isRefreshing = false
         }
 
-        btn_translate.setOnClickListener{
-            presenter.translateText(txt = txt_quote_eng.text.toString(), author = txt_author_eng.text.toString())
+        btn_translate.setOnClickListener {
+            presenter.translateText(
+                txt = txt_quote_eng.text.toString(),
+                author = txt_author_eng.text.toString()
+            )
         }
     }
 
@@ -64,7 +69,7 @@ class ProgrammingFragment : MvpAppCompatFragment(), ViewProgramming {
 
     override fun load() {
         cpv_programming_loader.visibility = View.VISIBLE
-        btn_next_programming.isEnabled = false
+        btn_next.isEnabled = false
     }
 
     override fun errorLoad(textError: String?) {
@@ -77,17 +82,25 @@ class ProgrammingFragment : MvpAppCompatFragment(), ViewProgramming {
 
     override fun completeLoadingEn(quoteEn: String, quoteAuthorEn: String) {
         mcv_rus.visibility = View.GONE
+        mcv_eng.visibility = View.VISIBLE
         cpv_programming_loader.visibility = View.GONE
-        btn_next_programming.isEnabled = true
+        btn_next.isEnabled = true
         txt_quote_eng.text = quoteEn
         txt_author_eng.text = quoteAuthorEn
+
+        val anim = ObjectAnimator.ofFloat(mcv_eng, "translationX", -1000f, 0f)
+        anim.duration = 300
+        anim.interpolator = FastOutSlowInInterpolator()
+        anim.start()
     }
 
     override fun completeLoadingRu(quoteRu: String, quoteAuthorRu: String) {
         cpv_programming_loader.visibility = View.GONE
-        btn_next_programming.isEnabled = true
+        btn_next.isEnabled = true
         txt_quote_rus.text = quoteRu
         txt_author_rus.text = quoteAuthorRu
+
+
     }
 
     override fun saveQuote() {
@@ -105,6 +118,10 @@ class ProgrammingFragment : MvpAppCompatFragment(), ViewProgramming {
 
     override fun translateQuote() {
         mcv_rus.visibility = View.VISIBLE
+        val anim = ObjectAnimator.ofFloat(mcv_rus, "translationX", -1000f, 0f)
+        anim.duration = 300
+        anim.interpolator = FastOutSlowInInterpolator()
+        anim.start()
     }
 
     override fun onDestroy() {

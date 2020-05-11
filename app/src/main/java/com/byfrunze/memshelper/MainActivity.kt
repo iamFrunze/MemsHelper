@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity(), RealmController {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val builder = StrictMode.VmPolicy.Builder()
+        setContentTransition()
 
         val sharedPreferences = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -88,6 +89,21 @@ class MainActivity : AppCompatActivity(), RealmController {
                 message(text = "Problem with network")
                 icon(R.drawable.ic_uncheck)
             }
+        }
+    }
+
+    private fun setContentTransition() {
+        with(this) {
+            window.requestFeature(android.view.Window.FEATURE_ACTIVITY_TRANSITIONS)
+            window.allowEnterTransitionOverlap = true
+            window.allowReturnTransitionOverlap = true
+            val explode = android.transition.Explode()
+            val changeBounds = android.transition.ChangeBounds()
+            changeBounds.duration = 800
+            explode.duration = 800
+            window.sharedElementExitTransition = changeBounds
+            window.exitTransition = explode
+            window.reenterTransition = explode
         }
     }
 

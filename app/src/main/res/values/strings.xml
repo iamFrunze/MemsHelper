@@ -22,12 +22,11 @@
     <string name="empty_history">У Вас нету сохраненок</string>
     <string name="search">Поиск</string>
     <string name="create_mem">Создай свой Мем</string>
-    <string name="choose_color">Choose color</string>
-    <string name="color_hex_code">Color HEX code</string>
-    <string name="ok">Ok</string>
+    <string name="choose_color">Выберите цвет</string>
+    <string name="ok">Выбрать</string>
     <string name="download">Скачать</string>
     <string name="send">Отправить</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Текст</string>
     <string name="add_widget">Add widget</string>
     <string name="settings_widget">Настройка виджета</string>
     <string name="choose_el">Выберите цитаты для показа в виджете</string>
@@ -35,4 +34,6 @@
     <string name="eng">Eng</string>
     <string name="ru">Ru</string>
     <string name="author">author</string>
+    <string name="choose_img">Выберите изображение</string>
+    <string name="add_textview">Добавить текст</string>
 </resources>
