@@ -55,8 +55,11 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
             swipe_refresh_chack.isRefreshing = false
         }
 
-        btn_translate.setOnClickListener{
-            presenter.translateText(txt = txt_quote_eng.text.toString(), author = txt_author_eng.text.toString())
+        btn_translate.setOnClickListener {
+            presenter.translateText(
+                txt = txt_quote_eng.text.toString(),
+                author = txt_author_eng.text.toString()
+            )
         }
     }
 
@@ -79,8 +82,9 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
     }
 
     override fun completeLoadingEn(icon: String, quoteEn: String) {
+        mcv_rus.visibility = View.GONE
         cpv_chack_loader.visibility = View.GONE
-        txt_author_eng.isEnabled = true
+        btn_next_chack.isEnabled = true
         txt_quote_eng.text = quoteEn
         txt_author_eng.text = getString(R.string.chack_norris_en)
         Picasso.get()

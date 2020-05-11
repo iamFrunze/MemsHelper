@@ -83,7 +83,7 @@ class AdviceSlipFragment : MvpAppCompatFragment(), ViewAdviceSlip {
     override fun completeLoadingEn(quoteEn: String) {
         mcv_rus.visibility = View.GONE
         cpv_advice_loader.visibility = View.GONE
-        txt_quote_eng.isEnabled = true
+        btn_next_advice.isEnabled = true
         txt_quote_eng.text = quoteEn
     }
 
