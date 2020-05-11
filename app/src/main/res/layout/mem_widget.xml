@@ -2,7 +2,7 @@
     android:id="@+id/ll_widget"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="#BFFFFFFF"
     android:orientation="vertical"
     android:padding="@dimen/widget_margin">
 
@@ -11,6 +11,7 @@
         android:id="@+id/appwidget_text_eng"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_margin="8dp"
         android:contentDescription="@string/eng"
         android:text="@string/eng"
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:textColor="@color/black"
         android:contentDescription="@string/ru"
         android:text="@string/ru"
         android:textSize="16sp" />
@@ -33,7 +35,7 @@
         android:layout_margin="8dp"
         android:contentDescription="@string/author"
         android:text="@string/author"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textStyle="italic" />
 
     <TextView
@@ -42,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-
         android:text="@string/ya_lic"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 </LinearLayout>

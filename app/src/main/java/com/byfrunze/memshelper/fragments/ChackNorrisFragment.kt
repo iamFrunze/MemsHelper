@@ -59,8 +59,7 @@ class ChackNorrisFragment : MvpAppCompatFragment(), ViewChackNorris {
 
         btn_translate.setOnClickListener {
             presenter.translateText(
-                txt = txt_quote_eng.text.toString(),
-                author = txt_author_eng.text.toString()
+                txt = txt_quote_eng.text.toString()
             )
         }
     }

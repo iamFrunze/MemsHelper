@@ -34,7 +34,7 @@ class PresenterChackNorris : MvpPresenter<ViewChackNorris>() {
         ProviderChackNorris(this).loadQuotesEn()
     }
 
-    fun translateText(txt: String, author: String) {
+    fun translateText(txt: String) {
         viewState.load()
         viewState.translateQuote()
         ProviderChackNorris(this).loadTranslate(text = txt)

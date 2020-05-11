@@ -1,5 +1,6 @@
 package com.byfrunze.memshelper.adapters
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -8,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.byfrunze.memshelper.R
+import com.byfrunze.memshelper.fragments.CreateMemFragment
+import com.github.florent37.viewtooltip.ViewTooltip
 import kotlinx.android.synthetic.main.cell_create_text.view.*
 
-class TextCreateAdapter : RecyclerView.Adapter<TextCreateAdapter.ViewHolder>() {
+class TextCreateAdapter(val frag: CreateMemFragment) : RecyclerView.Adapter<TextCreateAdapter.ViewHolder>() {
 
     private val listText = ArrayList<String>()
     var onCloseClickListener: OnCloseClickListener? = null
@@ -80,6 +83,13 @@ class TextCreateAdapter : RecyclerView.Adapter<TextCreateAdapter.ViewHolder>() {
                 for (a in arrayCheck) {
                     a.setImageResource(R.drawable.ic_remove_circle_outline_white_24dp)
                 }
+                ViewTooltip
+                    .on(frag, imgCheck)
+                    .autoHide(true, 5000)
+                    .corner(30)
+                    .position(ViewTooltip.Position.TOP)
+                    .text("Выберите элемент, чтобы изменить")
+                    .show()
                 imgCheck.setImageResource(R.drawable.ic_check_white_24dp)
                 onChooseItemListener?.onChooseItem(adapterPosition)
             }

@@ -1,6 +1,8 @@
 package com.byfrunze.memshelper.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -23,6 +25,7 @@ import com.byfrunze.memshelper.adapters.FontAdapter
 import com.byfrunze.memshelper.adapters.TextCreateAdapter
 import com.flask.colorpicker.ColorPickerView
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder
+import com.github.florent37.viewtooltip.ViewTooltip
 import com.xw.repo.BubbleSeekBar
 import kotlinx.android.synthetic.main.fragment_create_mem.*
 import java.io.File
@@ -40,11 +43,14 @@ class CreateMemFragment : Fragment() {
 
     private var checkSender = false
     private var URI_IMG: Uri? = null
-    private var PICK_IMAGE = 100
     lateinit var mAdapter: FontAdapter
     lateinit var mAdapterTextCreate: TextCreateAdapter
 
     private val arrayTextView = ArrayList<TextView>()
+
+    lateinit var pref: SharedPreferences
+    val NAME_PREF = "count_app_launch"
+    val NAME_PREF_KEY = "launcher"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,10 +62,12 @@ class CreateMemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pref = requireContext().getSharedPreferences(NAME_PREF, Context.MODE_PRIVATE)
+
         btn_change_img.setOnClickListener {
             val photoPiker = Intent(Intent.ACTION_PICK)
             photoPiker.type = "image/*"
-            startActivityForResult(photoPiker, PICK_IMAGE)
+            startActivityForResult(photoPiker, 0)
             checkSender = false
             btn_send_create.isEnabled = checkSender
         }
@@ -69,13 +77,24 @@ class CreateMemFragment : Fragment() {
         optionBottomMenu()
 
 
-
     }
 
+    private fun createTooltip(view: View, text: String, pos: ViewTooltip.Position) {
+        ViewTooltip
+            .on(this, view)
+            .autoHide(true, 5000)
+            .corner(30)
+            .position(pos)
+            .text(text)
+            .show()
+    }
 
     fun transitionTxt(txt: TextView) {
         var xDelta = 0
         var yDelta = 0
+
+        if (pref.getInt(NAME_PREF_KEY, 10) != 1)
+            createTooltip(txt, "Ваш текст", ViewTooltip.Position.BOTTOM)
 
         txt.setOnTouchListener(View.OnTouchListener { view, event ->
             event?.let {
@@ -107,6 +126,7 @@ class CreateMemFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         URI_IMG = data?.data
         img_create.setImageURI(URI_IMG)
 
@@ -140,6 +160,18 @@ class CreateMemFragment : Fragment() {
                     constr_layout_share.visibility = View.VISIBLE
 
                     var filePath: File? = null
+                    if (pref.getInt(NAME_PREF_KEY, 10) != 1) {
+                        createTooltip(
+                            btn_download_create,
+                            "Сначала сохраните на телефон",
+                            ViewTooltip.Position.TOP
+                        )
+                        createTooltip(
+                            btn_send_create,
+                            "Затем отправьте",
+                            ViewTooltip.Position.TOP
+                        )
+                    }
                     btn_download_create.setOnClickListener {
                         val bitmap = getScreenShot(frame_gran)
                         val folderToSave = requireContext().externalMediaDirs[0]
@@ -217,9 +249,16 @@ class CreateMemFragment : Fragment() {
     }
 
     private fun createRecycleViewCreate() {
-        mAdapterTextCreate = TextCreateAdapter()
+        mAdapterTextCreate = TextCreateAdapter(this)
 
 
+        if (pref.getInt(NAME_PREF_KEY, 10) != 1) {
+            createTooltip(
+                btn_new_text_create,
+                "Создайте свой текст",
+                ViewTooltip.Position.TOP
+            )
+        }
         btn_new_text_create.setOnClickListener {
             mAdapterTextCreate.setupText("Example")
             val newTextView = TextView(requireContext())
@@ -243,7 +282,6 @@ class CreateMemFragment : Fragment() {
                     FontAdapter.OnChangeTextFontListener {
                     override fun onChangeFontText(create: Typeface) {
                         if (position < arrayTextView.count())
-
                             arrayTextView[position].typeface = create
                     }
                 })
@@ -311,7 +349,7 @@ class CreateMemFragment : Fragment() {
                 }
                 .setPositiveButton(
                     "Выбрать"
-                ) { d, lastSelectedColor, _ ->
+                ) { _, lastSelectedColor, _ ->
                     txt?.setTextColor(lastSelectedColor)
                 }
                 .setNegativeButton(
@@ -323,6 +361,13 @@ class CreateMemFragment : Fragment() {
                 .show()
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val  editor = pref.edit()
+        editor.putInt(NAME_PREF_KEY, 1)
+        editor.apply()
     }
 
 }

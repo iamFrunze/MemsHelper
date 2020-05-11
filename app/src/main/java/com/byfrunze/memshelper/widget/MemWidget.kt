@@ -6,22 +6,11 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Color
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View.inflate
-import android.view.ViewGroup
 import android.widget.RemoteViews
-import androidx.annotation.StringRes
-import androidx.core.content.res.ResourcesCompat
 import com.byfrunze.memshelper.R
-import com.byfrunze.memshelper.helpers.RetroService
-import com.byfrunze.memshelper.helpers.services.AdviceSlipApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import jp.wasabeef.blurry.Blurry
-import java.util.*
 
 
 /**
@@ -49,11 +38,7 @@ open class MemWidget : AppWidgetProvider() {
         val remoteViews = RemoteViews(context.packageName, R.layout.mem_widget)
         val watchWidget = ComponentName(context, MemWidget::class.java)
         // There may be multiple widgets active, so update all of them
-        Blurry.with(context)
-            .radius(10)
-            .sampling(8)
-            .color(Color.argb(66, 255, 255, 0))
-            .async()
+
         remoteViews.setOnClickPendingIntent(
             R.id.ll_widget,
             getPendingSelfIntent(context, SYNC_CLICKED)
